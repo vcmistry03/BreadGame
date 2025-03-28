@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://4y64yck5e81t"]
+
+[ext_resource type="Script" path="res://scenes/enemies/GoldUrchin.gd" id="1_v57v1"]
+[ext_resource type="Texture2D" uid="uid://clc6jjnoqxg4q" path="res://assets/enemies/CRAB_Dyn_Urchin_GoldA_v1.png" id="2_7ws22"]
+[ext_resource type="Texture2D" uid="uid://1jb5yp5c1mt6" path="res://assets/enemies/CRAB_Dyn_Urchin_GoldB_v1.png" id="3_i83qo"]
+[ext_resource type="Texture2D" uid="uid://dqliglvsw8ofm" path="res://assets/UI/HPbar.jpg" id="3_lqtji"]
+[ext_resource type="AudioStream" uid="uid://blgek0h8nsbbf" path="res://assets/sounds/CRAB_SFX_EnemyDeath_v2.mp3" id="4_43n0j"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wmxfo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7ws22")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_i83qo")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0fijd"]
+radius = 21.5058
+
+[node name="GoldUrchin" type="PathFollow2D"]
+loop = false
+script = ExtResource("1_v57v1")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+scale = Vector2(0.75, 0.75)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(1.33333, -1.33333)
+scale = Vector2(0.193333, 0.193333)
+sprite_frames = SubResource("SpriteFrames_wmxfo")
+animation = &"Walk"
+frame_progress = 0.352005
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_0fijd")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+layout_direction = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -30.0
+offset_top = -40.0
+offset_right = 30.0
+offset_bottom = -34.0
+grow_horizontal = 2
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("3_lqtji")
+texture_progress = ExtResource("3_lqtji")
+tint_under = Color(0.197937, 0.197937, 0.197937, 1)
+tint_progress = Color(0, 0.59492, 0.253483, 1)
+
+[node name="Impact" type="Marker2D" parent="."]
+position = Vector2(-10, -10)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_43n0j")

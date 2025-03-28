@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ds6oohwlf2u3i"]
+
+[ext_resource type="Script" path="res://scenes/turrets/turrets.gd" id="1_isbyp"]
+[ext_resource type="AudioStream" uid="uid://bj6bvc7xxsp46" path="res://assets/sounds/CRAB_SFX_EnemyDeath_v1.mp3" id="2_qiujx"]
+
+[node name="Turrets" type="Node2D"]
+script = ExtResource("1_isbyp")
+
+[node name="fire" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_qiujx")

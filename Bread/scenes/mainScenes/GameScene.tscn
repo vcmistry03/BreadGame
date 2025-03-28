@@ -1,0 +1,370 @@
+[gd_scene load_steps=18 format=3 uid="uid://4i25rfd43nrv"]
+
+[ext_resource type="Script" path="res://scenes/mainScenes/GameScene.gd" id="1_kt5qk"]
+[ext_resource type="PackedScene" uid="uid://ctenm5wnp2dtp" path="res://scenes/maps/map_1.tscn" id="2_ykfvm"]
+[ext_resource type="Script" path="res://scenes/mainScenes/ui.gd" id="3_2kad7"]
+[ext_resource type="Texture2D" uid="uid://cwmelx07yucba" path="res://assets/UI/buttons/button_square_depth_gradient.png" id="3_y4yee"]
+[ext_resource type="Texture2D" uid="uid://b65rxvnrta1yi" path="res://assets/towers/CRAB_Dyn_Turret_Standard_v1.png" id="5_23qaa"]
+[ext_resource type="Texture2D" uid="uid://cictlbfrmmauh" path="res://assets/towers/CRAB_Dyn_Turret_EarthA_v2.png" id="7_j55ut"]
+[ext_resource type="Texture2D" uid="uid://dmvj7crq6ptai" path="res://assets/Icons/play.png" id="8_2syfi"]
+[ext_resource type="Texture2D" uid="uid://d2fkx4jdsukgj" path="res://assets/towers/CRAB_Dyn_Turret_Fire_Shaft_v1.png" id="8_y8eva"]
+[ext_resource type="Texture2D" uid="uid://bx1mc67rtnxht" path="res://assets/towers/CRAB_Dyn_Turret_WaterA_v1.png" id="9_hfgdo"]
+[ext_resource type="Texture2D" uid="uid://pq63cyblqyi8" path="res://assets/Icons/pause.png" id="9_ok1ca"]
+[ext_resource type="Texture2D" uid="uid://kriejg1awqog" path="res://assets/Icons/fastForward.png" id="10_3ntvn"]
+[ext_resource type="Texture2D" uid="uid://eisuy7snl8bp" path="res://assets/towers/CRAB_Dyn_Turret_ElectricA_v1.png" id="10_se4yy"]
+[ext_resource type="FontFile" uid="uid://iw3o4j75jcwf" path="res://resources/fonts/font_ui50.tres" id="11_4vhs7"]
+[ext_resource type="Texture2D" uid="uid://llyllpgvc0ed" path="res://assets/Icons/home.png" id="12_miuy3"]
+[ext_resource type="Texture2D" uid="uid://dqliglvsw8ofm" path="res://assets/UI/HPbar.jpg" id="13_pmmvp"]
+[ext_resource type="AudioStream" uid="uid://fbtllpkq1dwt" path="res://assets/sounds/CRAB_SFX_Place_v1.mp3" id="16_3oad8"]
+[ext_resource type="AudioStream" uid="uid://df4ehpbodevxn" path="res://assets/sounds/CRAB_MUS_Battle_v1.mp3" id="17_ifie3"]
+
+[node name="GameScene" type="Node2D"]
+script = ExtResource("1_kt5qk")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="Map1" parent="." instance=ExtResource("2_ykfvm")]
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("3_2kad7")
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BuildBar" type="HBoxContainer" parent="UI/HUD"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -90.0
+offset_right = 30.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 25
+
+[node name="Gun" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
+process_mode = 3
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("3_y4yee")
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="UI/HUD/BuildBar/Gun"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -9.0
+offset_top = 27.0
+offset_right = -15.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.522491
+texture = ExtResource("5_23qaa")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/HUD/BuildBar/Gun"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 45.0
+offset_bottom = 26.0
+theme_override_fonts/font = ExtResource("11_4vhs7")
+theme_override_font_sizes/font_size = 20
+text = "50"
+
+[node name="Gun2" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
+process_mode = 3
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("3_y4yee")
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="UI/HUD/BuildBar/Gun2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = 51.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.658597
+texture = ExtResource("9_hfgdo")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/HUD/BuildBar/Gun2"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 45.0
+offset_bottom = 26.0
+theme_override_fonts/font = ExtResource("11_4vhs7")
+theme_override_font_sizes/font_size = 20
+text = "100"
+
+[node name="Gun3" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
+process_mode = 3
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("3_y4yee")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UI/HUD/BuildBar/Gun3"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 45.0
+offset_bottom = 26.0
+theme_override_fonts/font = ExtResource("11_4vhs7")
+theme_override_font_sizes/font_size = 20
+text = "100"
+
+[node name="Icon" type="TextureRect" parent="UI/HUD/BuildBar/Gun3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = 32.0
+offset_right = -19.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.512122
+texture = ExtResource("7_j55ut")
+expand_mode = 1
+
+[node name="Gun4" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
+process_mode = 3
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("3_y4yee")
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="UI/HUD/BuildBar/Gun4"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = 56.0
+offset_right = 11.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.603405
+texture = ExtResource("8_y8eva")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/HUD/BuildBar/Gun4"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 45.0
+offset_bottom = 26.0
+theme_override_fonts/font = ExtResource("11_4vhs7")
+theme_override_font_sizes/font_size = 20
+text = "100"
+
+[node name="Gun5" type="TextureButton" parent="UI/HUD/BuildBar" groups=["build_buttons"]]
+process_mode = 3
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("3_y4yee")
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="UI/HUD/BuildBar/Gun5"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 51.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.671952
+texture = ExtResource("10_se4yy")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/HUD/BuildBar/Gun5"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 45.0
+offset_bottom = 26.0
+theme_override_fonts/font = ExtResource("11_4vhs7")
+theme_override_font_sizes/font_size = 20
+text = "100"
+
+[node name="GameControls" type="HBoxContainer" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -204.0
+offset_top = -100.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="PausePlay" type="TextureButton" parent="UI/HUD/GameControls"]
+process_mode = 3
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+toggle_mode = true
+texture_normal = ExtResource("8_2syfi")
+texture_pressed = ExtResource("9_ok1ca")
+
+[node name="SpeedUp" type="TextureButton" parent="UI/HUD/GameControls"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("10_3ntvn")
+
+[node name="InfoBar" type="ColorRect" parent="UI/HUD"]
+self_modulate = Color(0, 0, 0, 0.470588)
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="H" type="HBoxContainer" parent="UI/HUD/InfoBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Symbol" type="Label" parent="UI/HUD/InfoBar/H"]
+custom_minimum_size = Vector2(120, 60)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.705882)
+theme_override_fonts/font = ExtResource("11_4vhs7")
+theme_override_font_sizes/font_size = 50
+text = "$"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Money" type="Label" parent="UI/HUD/InfoBar/H"]
+custom_minimum_size = Vector2(110, 60)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.705882)
+theme_override_fonts/font = ExtResource("11_4vhs7")
+theme_override_font_sizes/font_size = 30
+text = "100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Control2" type="Control" parent="UI/HUD/InfoBar/H"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="wave_text" type="Label" parent="UI/HUD/InfoBar/H"]
+custom_minimum_size = Vector2(120, 60)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.705882)
+theme_override_fonts/font = ExtResource("11_4vhs7")
+theme_override_font_sizes/font_size = 30
+text = "Wave:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="coords" type="Label" parent="UI/HUD/InfoBar/H"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.705882)
+theme_override_fonts/font = ExtResource("11_4vhs7")
+theme_override_font_sizes/font_size = 30
+text = "100"
+vertical_alignment = 1
+
+[node name="coords2" type="Label" parent="UI/HUD/InfoBar/H"]
+custom_minimum_size = Vector2(110, 60)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.705882)
+theme_override_fonts/font = ExtResource("11_4vhs7")
+theme_override_font_sizes/font_size = 30
+text = "/15"
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="UI/HUD/InfoBar/H"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+texture = ExtResource("12_miuy3")
+
+[node name="HP" type="TextureProgressBar" parent="UI/HUD/InfoBar/H"]
+custom_minimum_size = Vector2(400, 30)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+nine_patch_stretch = true
+texture_under = ExtResource("13_pmmvp")
+texture_progress = ExtResource("13_pmmvp")
+tint_under = Color(0.215686, 0.215686, 0.215686, 1)
+tint_progress = Color(0, 0.7329, 0.157312, 1)
+
+[node name="Control" type="Control" parent="UI/HUD/InfoBar/H"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="win" type="Label" parent="UI/HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.5
+offset_top = -11.5
+offset_right = 34.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("11_4vhs7")
+theme_override_font_sizes/font_size = 150
+text = "You Won!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TurretPlace" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_3oad8")
+
+[node name="GameMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_ifie3")
+autoplay = true
+
+[connection signal="pressed" from="UI/HUD/GameControls/PausePlay" to="UI" method="_on_pause_play_pressed"]
+[connection signal="pressed" from="UI/HUD/GameControls/SpeedUp" to="UI" method="_on_speed_up_pressed"]

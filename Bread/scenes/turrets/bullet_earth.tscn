@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://du8uv2ylvhnqd"]
+
+[ext_resource type="Script" path="res://scenes/turrets/bullet_earth.gd" id="1_0lmxv"]
+[ext_resource type="Texture2D" uid="uid://cgojcnpwun6pf" path="res://assets/towers/CRAB_Dyn_Bullet_EarthA_v1.png" id="1_nfqis"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2e6w7"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vbq7h"]
+radius = 60.0
+
+[node name="BulletEarth" type="CharacterBody2D"]
+script = ExtResource("1_0lmxv")
+
+[node name="Cannon ball" type="Sprite2D" parent="."]
+texture = ExtResource("1_nfqis")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2e6w7")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_vbq7h")

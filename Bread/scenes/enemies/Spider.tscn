@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://fw67rdfmv5k6"]
+
+[ext_resource type="Script" path="res://scenes/enemies/Spider.gd" id="1_at1yt"]
+[ext_resource type="Texture2D" uid="uid://bninhgx6c7cf0" path="res://assets/enemies/CRAB_Dyn_spider_v1.png" id="2_nf87h"]
+[ext_resource type="Texture2D" uid="uid://dyhls8aeknte" path="res://assets/enemies/CRAB_Dyn_Spider_v2.png" id="3_sebq7"]
+[ext_resource type="Texture2D" uid="uid://dqliglvsw8ofm" path="res://assets/UI/HPbar.jpg" id="3_vtwp3"]
+[ext_resource type="AudioStream" uid="uid://blgek0h8nsbbf" path="res://assets/sounds/CRAB_SFX_EnemyDeath_v2.mp3" id="4_yc62o"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h4i80"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_nf87h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sebq7")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0fijd"]
+radius = 21.5058
+
+[node name="Spider" type="PathFollow2D"]
+loop = false
+script = ExtResource("1_at1yt")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+rotation = 1.5708
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(-3.6478e-05, -10)
+scale = Vector2(0.195035, 0.195035)
+sprite_frames = SubResource("SpriteFrames_h4i80")
+animation = &"Walk"
+frame_progress = 0.3865
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-1, -1.94707e-07)
+shape = SubResource("CircleShape2D_0fijd")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+layout_direction = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -30.0
+offset_top = -40.0
+offset_right = 30.0
+offset_bottom = -34.0
+grow_horizontal = 2
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("3_vtwp3")
+texture_progress = ExtResource("3_vtwp3")
+tint_under = Color(0.197937, 0.197937, 0.197937, 1)
+tint_progress = Color(0, 0.59492, 0.253483, 1)
+
+[node name="Impact" type="Marker2D" parent="."]
+position = Vector2(-14, -14)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_yc62o")

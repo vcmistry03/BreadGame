@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://bbv1522d0qume"]
+
+[ext_resource type="Script" path="res://scenes/enemies/Snake.gd" id="1_degoo"]
+[ext_resource type="Texture2D" uid="uid://duaagcbiuuwa7" path="res://assets/enemies/CRAB_Dyn_snake_v1.png" id="2_1yu4l"]
+[ext_resource type="Texture2D" uid="uid://uwehyu6rr3so" path="res://assets/enemies/CRAB_Dyn_snake_v2.png" id="3_1u5ub"]
+[ext_resource type="Texture2D" uid="uid://dqliglvsw8ofm" path="res://assets/UI/HPbar.jpg" id="3_u500i"]
+[ext_resource type="AudioStream" uid="uid://blgek0h8nsbbf" path="res://assets/sounds/CRAB_SFX_EnemyDeath_v2.mp3" id="4_4ypcc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4r7ng"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1yu4l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1u5ub")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o57ui"]
+radius = 8.0
+height = 100.0
+
+[node name="Snake" type="PathFollow2D"]
+loop = false
+script = ExtResource("1_degoo")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+rotation = 1.5708
+scale = Vector2(1.75, 1.75)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(-2.86102e-06, -1.14286)
+scale = Vector2(0.192777, 0.192777)
+sprite_frames = SubResource("SpriteFrames_4r7ng")
+animation = &"Walk"
+frame_progress = 0.0454001
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-1, 0)
+shape = SubResource("CapsuleShape2D_o57ui")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+layout_direction = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -30.0
+offset_top = -40.0
+offset_right = 30.0
+offset_bottom = -34.0
+grow_horizontal = 2
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("3_u500i")
+texture_progress = ExtResource("3_u500i")
+tint_under = Color(0.197937, 0.197937, 0.197937, 1)
+tint_progress = Color(0, 0.59492, 0.253483, 1)
+
+[node name="Impact" type="Marker2D" parent="."]
+position = Vector2(-42, -10)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_4ypcc")

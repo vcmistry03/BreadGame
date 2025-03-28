@@ -1,0 +1,85 @@
+[gd_scene load_steps=10 format=3 uid="uid://bn4f58giwh25r"]
+
+[ext_resource type="Texture2D" uid="uid://bf21o4m6rae0w" path="res://assets/towers/towerDefense_tile181.png" id="1_8h6ht"]
+[ext_resource type="Script" path="res://scenes/turrets/Gun3T1.gd" id="1_dr24t"]
+[ext_resource type="Texture2D" uid="uid://cictlbfrmmauh" path="res://assets/towers/CRAB_Dyn_Turret_EarthA_v2.png" id="2_dyf5n"]
+[ext_resource type="Texture2D" uid="uid://du2sbkoa02xyg" path="res://assets/effects/towerDefense_tile298.png" id="4_qupug"]
+[ext_resource type="AudioStream" uid="uid://b3oxndhcvac16" path="res://assets/sounds/turrets/CRAB_SFX_EarthTurret_v1.mp3" id="5_j0phn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_23ajv"]
+radius = 20.0
+
+[sub_resource type="Animation" id="Animation_lvo6y"]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Turret/Muzzle/MuzzleFlash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.001, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_y6rsd"]
+resource_name = "fire"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Turret/Muzzle/MuzzleFlash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0001, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3iqaj"]
+_data = {
+"RESET": SubResource("Animation_lvo6y"),
+"fire": SubResource("Animation_y6rsd")
+}
+
+[node name="Gun3T1" type="Node2D"]
+script = ExtResource("1_dr24t")
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = ExtResource("1_8h6ht")
+
+[node name="Turret" type="Sprite2D" parent="."]
+position = Vector2(-1, 0)
+scale = Vector2(0.194156, 0.194156)
+texture = ExtResource("2_dyf5n")
+offset = Vector2(50, 0)
+
+[node name="Muzzle" type="Node2D" parent="Turret"]
+position = Vector2(180, 0)
+
+[node name="MuzzleFlash" type="Sprite2D" parent="Turret/Muzzle"]
+position = Vector2(71.3661, -7.62939e-06)
+rotation = 1.5708
+scale = Vector2(2.26401, 2.26401)
+texture = ExtResource("4_qupug")
+
+[node name="Range" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_23ajv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3iqaj")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_j0phn")
+volume_db = -5.0
+
+[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]

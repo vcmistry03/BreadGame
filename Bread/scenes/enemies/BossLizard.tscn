@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://6esaov8curcg"]
+
+[ext_resource type="Script" path="res://scenes/enemies/BossLizard.gd" id="1_bkakk"]
+[ext_resource type="Texture2D" uid="uid://bgjt7md2o7p1k" path="res://assets/enemies/CRAB_Dyn_BossLizard_v1.png" id="2_5y1gp"]
+[ext_resource type="Texture2D" uid="uid://mkwwdf6pf2qb" path="res://assets/enemies/CRAB_Dyn_BossLizard_v2.png" id="3_mv4uo"]
+[ext_resource type="Texture2D" uid="uid://dqliglvsw8ofm" path="res://assets/UI/HPbar.jpg" id="4_tmgmw"]
+[ext_resource type="AudioStream" uid="uid://blgek0h8nsbbf" path="res://assets/sounds/CRAB_SFX_EnemyDeath_v2.mp3" id="5_ci0le"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sgnws"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5y1gp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mv4uo")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 1.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o57ui"]
+radius = 10.2222
+height = 140.0
+
+[node name="BossLizard" type="PathFollow2D"]
+scale = Vector2(1.5, 1.5)
+loop = false
+script = ExtResource("1_bkakk")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+rotation = 1.5708
+scale = Vector2(1.5, 1.5)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(1.33342, 23.5555)
+scale = Vector2(0.395994, 0.395994)
+sprite_frames = SubResource("SpriteFrames_sgnws")
+animation = &"Walk"
+frame = 1
+frame_progress = 0.657666
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-3.1352e-05, -8.66667)
+shape = SubResource("CapsuleShape2D_o57ui")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+layout_direction = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.3333
+offset_top = -68.0
+offset_right = 91.6667
+offset_bottom = -56.0
+grow_horizontal = 2
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("4_tmgmw")
+texture_progress = ExtResource("4_tmgmw")
+tint_under = Color(0.197937, 0.197937, 0.197937, 1)
+tint_progress = Color(0, 0.59492, 0.253483, 1)
+
+[node name="Impact" type="Marker2D" parent="."]
+position = Vector2(-32.6667, -10.6667)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ci0le")

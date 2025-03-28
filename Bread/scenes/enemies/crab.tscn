@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://ntkari3q7mdg"]
+
+[ext_resource type="Texture2D" uid="uid://wjtffypil1us" path="res://assets/enemies/CRAB_Dyn_crab_v2.png" id="1_tmkwm"]
+[ext_resource type="Texture2D" uid="uid://cq028y2j3bqmk" path="res://assets/enemies/CRAB_ANIM_FR1.png" id="2_64mvf"]
+[ext_resource type="Texture2D" uid="uid://dtrkubumyxeud" path="res://assets/enemies/CRAB_ANIM_FR2.png" id="3_txap2"]
+[ext_resource type="Texture2D" uid="uid://bhgcb85ejxv7b" path="res://assets/enemies/CRAB_ANIM_FR3_v2.png" id="4_1tnmi"]
+[ext_resource type="Texture2D" uid="uid://d36axv8lyfq6m" path="res://assets/enemies/CRAB_ANIM_FR4.png" id="5_pwwlw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ovlkd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_64mvf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_txap2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1tnmi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pwwlw")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[node name="Crab" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(1, 0)
+scale = Vector2(0.16087, 0.16087)
+texture = ExtResource("1_tmkwm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+visible = false
+position = Vector2(1, 4)
+scale = Vector2(0.161167, 0.161167)
+sprite_frames = SubResource("SpriteFrames_ovlkd")
+animation = &"Walk"
+frame = 1
+frame_progress = 0.665945
